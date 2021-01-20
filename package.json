@@ -1,0 +1,31 @@
+{
+  "name": "partial_app_website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/node_modules/jstransformer-mdx-it.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "parcel ./src/**/*.pug --no-cache",
+    "pre:build": "parcel build ./mdx-renderer.js --no-cache"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@emotion/react": "^11.1.4",
+    "@emotion/styled": "^11.0.0",
+    "@mdx-js/runtime": "^1.6.22",
+    "autoprefixer": "^9.8.6",
+    "jstransformer-markdown-it": "^2.1.0",
+    "minireset.css": "0.0.6",
+    "parcel": "^2.0.0-beta.1",
+    "postcss": "^7.0.35",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2",
+    "twin.macro": "^2.0.8"
+  },
+  "devDependencies": {
+    "pug": "^3.0.0",
+    "sass": "^1.32.4"
+  }
+}
