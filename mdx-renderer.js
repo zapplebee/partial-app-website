@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import ReactDom from 'react-dom/server'
 import MDX from '@mdx-js/runtime'
 
@@ -25,14 +25,28 @@ export const name = 'mdx-it'
 export const outputFormat = 'html'
 export const inputFormats = ['mdx-it', 'markdown', 'md', 'mdx']
 
+export function Footer() {
+    return <footer ><FooterBody /></footer>
+}
+
+export function FooterBody() {
+
+    const [clicks, setClicks] = React.useState(0)
+
+    const doClick = React.useCallback(() => {
+        console.log(clicks)
+        setClicks(1 + clicks)
+    }, [clicks, setClicks])
+
+    return <div onClick={doClick}>this is some footer content{clicks > 0 && " " + clicks}</div>
+}
+
+const Header = () => <header>this is a title</header>
+const Nav = () => <nav><a href="/">Home</a></nav>
+const Container = ({ children }) => <div className='container'>{children}</div>
 
 
-
-export const render = function (str, options) {
-
-    const mdx = `${str}`
-
-
+export function Document({ children }) {
     const components = {
         h1: H1,
         blockquote: Blockquote,
@@ -40,10 +54,18 @@ export const render = function (str, options) {
         li: Li
     }
 
-    console.log(options)
-    const scope = { ...options }
+    return <>
+        <Header />
+        <Nav />
+        <Container>
+            <MDX components={components} suppressHydrationWarning={true}>
+                {children}
+            </MDX>
+        </Container>
+        <Footer />
+    </>
+}
 
-    return ReactDom.renderToStaticMarkup(<MDX components={components} scope={scope}>
-        {mdx}
-    </MDX>)
+export const render = function (mdx) {
+    return ReactDom.renderToString(<Document>{mdx}</Document>)
 }

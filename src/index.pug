@@ -3,8 +3,9 @@ html
     head
         title Something Big
         link(href="./styles.scss",rel="stylesheet")
+
     body
-        :mdx-it
+        :mdx-it(sidebar=false)
             # Partial Application
 
             > A podcast that's partly about software and partly about life and hobbies. Because work-life balance should be a balance.
@@ -14,3 +15,4 @@ html
             * be
             * a
             * list
+        script(src="./main.js",defer=true)
