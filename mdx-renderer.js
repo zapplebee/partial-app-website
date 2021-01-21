@@ -1,8 +1,31 @@
 import * as React from 'react'
 import ReactDom from 'react-dom/server'
 import MDX from '@mdx-js/runtime'
+import dedent from "dedent"
 
 import tw, { styled } from 'twin.macro'
+
+import Highlight, { defaultProps } from 'prism-react-renderer'
+import theme from 'prism-react-renderer/themes/vsDark/index.cjs';
+
+
+const Code = ({ children }) => {
+    return (
+        <Highlight  {...defaultProps} theme={theme} code={dedent(children).trim()} language="javascript">
+            {({ className, style, tokens, getLineProps, getTokenProps }) => (
+                <pre className={className} style={{ ...style, padding: '20px' }}>
+                    {tokens.map((line, i) => (
+                        <div key={i} {...getLineProps({ line, key: i })}>
+                            {line.map((token, key) => (
+                                <span key={key} {...getTokenProps({ token, key })} />
+                            ))}
+                        </div>
+                    ))}
+                </pre>
+            )}
+        </Highlight>
+    )
+}
 
 const H1 = styled.h1(() => [
     tw`p-4 border text-xl font-bold text-purple`,
@@ -51,14 +74,15 @@ export function Document({ children }) {
         h1: H1,
         blockquote: Blockquote,
         ul: Ul,
-        li: Li
+        li: Li,
+        code: Code
     }
 
     return <>
         <Header />
         <Nav />
         <Container>
-            <MDX components={components} suppressHydrationWarning={true}>
+            <MDX components={components}>
                 {children}
             </MDX>
         </Container>

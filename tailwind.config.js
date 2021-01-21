@@ -12,7 +12,7 @@ module.exports = {
             }
         },
         fontFamily: {
-            sans: ['Graphik', 'sans-serif'],
+            sans: ['Montserrat', 'sans-serif'],
             serif: ['Merriweather', 'serif'],
         },
         extend: {
