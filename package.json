@@ -2,11 +2,28 @@
   "name": "partial_app_website",
   "version": "1.0.0",
   "description": "",
-  "main": "src/node_modules/jstransformer-mdx-it.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "parcel ./src/**/*.pug --no-cache",
-    "pre:build": "parcel build ./mdx-renderer.js --no-cache"
+    "build": "parcel build ./src/**/**/*.pug --dist-dir dist --target web",
+    "pre:build": "parcel build ./jstransformer-mdx-it.js --dist-dir ./src --target node_modules"
+  },
+  "targets": {
+    "node_modules": {
+      "context": "node",
+      "isLibrary": true,
+      "minify": false,
+      "engines": {
+        "node": "14"
+      }
+    },
+    "web": {
+      "context": "browser",
+      "isLibrary": false,
+      "minify": true,
+      "engines": {
+        "node": "14"
+      }
+    }
   },
   "author": "",
   "license": "ISC",
@@ -17,7 +34,6 @@
     "autoprefixer": "^9.8.6",
     "dedent": "^0.7.0",
     "jstransformer-markdown-it": "^2.1.0",
-    "minireset.css": "0.0.6",
     "parcel": "^2.0.0-beta.1",
     "postcss": "^7.0.35",
     "prism-react-renderer": "^1.1.1",
