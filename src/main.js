@@ -1,6 +1,6 @@
-import * as React from 'react'
-import { hydrate } from 'react-dom'
+import * as React from "react";
+import { hydrate } from "react-dom";
 
-import { FooterBody } from './../mdx-renderer'
+import { FooterBody } from "../components";
 
-hydrate(<FooterBody />, document.querySelector('footer'))
+hydrate(<FooterBody />, document.querySelector("footer"));
